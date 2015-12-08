@@ -1,6 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    before_action :authenticate
+    before_action :authenticate, except: :create
 
     def index
       @user = User.all

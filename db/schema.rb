@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 20151207192910) do
 
   create_table "bucketlists", force: :cascade do |t|
     t.string   "name"
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.boolean  "publicity",  default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "bucketlists", ["users_id"], name: "index_bucketlists_on_users_id"
+  add_index "bucketlists", ["user_id"], name: "index_bucketlists_on_user_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
