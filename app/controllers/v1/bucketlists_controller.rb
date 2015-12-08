@@ -1,6 +1,6 @@
 module V1
   class BucketlistsController < ApplicationController
-    before_action :authenticatew
+    before_action :authenticate
 
     def index
       @bucketlist = Bucketlist.all_bucketlists(@current_user.id)
@@ -22,9 +22,8 @@ module V1
 
     def create
       data = bucketlist_params.merge!(user_id: @current_user.id)
-      # binding.pry
       @bucketlist = Bucketlist.create(data) if bucketlist_params
-      render json: @bucketlist
+      render json: @bucketlist, status: 200
     end
 
     def update
