@@ -9,9 +9,10 @@ gem "spring", group: :development
 gem "sqlite3"
 gem "responders", "~> 2.0"
 gem "jwt"
+gem "figaro", "~> 1.0.0"
 # To use ActiveModel has_secure_password
 gem "bcrypt", "~> 3.1.7"
-gem "codeclimate-test-reporter", group: :test, require: nil
+
 # To use Jbuilder templates for JSON
 # gem "jbuilder"
 gem "active_model_serializers"
@@ -24,6 +25,7 @@ gem "active_model_serializers"
 # To use debugger
 # gem "ruby-debug19", :require => "ruby-debug"
 group :development, :test do
+  gem "codeclimate-test-reporter"
   gem "byebug"
   gem "pry"
   gem "rspec-rails", "~> 3.0"

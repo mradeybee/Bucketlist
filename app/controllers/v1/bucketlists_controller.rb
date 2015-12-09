@@ -41,11 +41,11 @@ module V1
     end
 
     def destroy
-    @bucketlist = Bucketlist.find(params[:id])
-    if @bucketlist.destroy
+      @bucketlist = Bucketlist.find(params[:id])
+      if @bucketlist.destroy
         render json: { Deleted: "Bucketlist with its items, has been deleted" }
+      end
     end
-  end
 
     private
 
