@@ -32,7 +32,7 @@ module V1
     def destroy
       @item = Item.find(params[:id])
       if @item.destroy
-          render json: { Deleted: "Item has been deleted" }
+        render json: { Deleted: "Item has been deleted" }
       end
     end
 
