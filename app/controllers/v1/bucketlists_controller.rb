@@ -3,11 +3,11 @@ module V1
     before_action :authenticate
 
     def index
-      if params[:limit].present? || params[:page].present?
-        @bucketlist = paginate(params[:limit], params[:page])
+      if params[:q].present?
+        @bucketlist = Bucketlist.search(@current_user.id, params[:q])
         render json: @bucketlist, status: 200
       else
-        @bucketlist = Bucketlist.blists(@current_user.id).limit(params[:limit])
+        @bucketlist = paginate(params[:limit], params[:page])
         render json: @bucketlist, status: 200
       end
     end
@@ -50,10 +50,11 @@ module V1
     private
 
     def bucketlist_params
-      params.permit(:id, :name, :publicity, :limit, :page)
+      params.permit(:id, :name, :publicity, :limit, :page, :q)
     end
 
     def paginate(limit, page)
+      # binding.pry
       lists = limit.to_i * page.to_i
       set = lists - limit.to_i
       Bucketlist.blists(@current_user.id).limit(limit).offset(set)

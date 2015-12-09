@@ -7,4 +7,10 @@ class Bucketlist < ActiveRecord::Base
   def self.blists(user)
     Bucketlist.where("user_id = ? OR publicity  = ?", user, true)
   end
+
+  def self.search(user, query)
+    list = Bucketlist.where("user_id = ? AND name = ?", user, query)
+    return { Oops!: "Bucketlist named '#{query}' not found" } if list.empty?
+    list
+  end
 end
