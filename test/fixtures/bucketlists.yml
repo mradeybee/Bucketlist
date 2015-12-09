@@ -1,11 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/
+# FixtureSet.html
 
 one:
   name: MyString
-  users_id: 
+  users_id:
   publicity: false
 
 two:
   name: MyString
-  users_id: 
+  users_id:
   publicity: false
