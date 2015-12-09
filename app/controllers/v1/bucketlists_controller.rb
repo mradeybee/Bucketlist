@@ -27,7 +27,7 @@ module V1
     end
 
     def update
-      @bucketlist =  Bucketlist.find(params[:id])
+      @bucketlist = Bucketlist.find(params[:id])
       if @bucketlist.update(bucketlist_params)
         render json: @bucketlist, status: 202
       else
@@ -40,7 +40,5 @@ module V1
     def bucketlist_params
       params.permit(:id, :name, :publicity)
     end
-
-
   end
 end
