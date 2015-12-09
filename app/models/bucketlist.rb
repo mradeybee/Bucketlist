@@ -5,7 +5,7 @@ class Bucketlist < ActiveRecord::Base
   validates :name, presence: true
   validates :user_id, presence: true
 
-  def self.all_bucketlists(user)
+  def self.blists(user)
     Bucketlist.where("user_id = ? OR publicity  = ?", user, true)
   end
 end

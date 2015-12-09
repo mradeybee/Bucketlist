@@ -6,7 +6,6 @@ class UserSerializer < ActiveModel::Serializer
   def attributes
     data = super
     if data[:errors].empty?
-      # binding.pry
       data.delete :errors
     else
       data = { errors: data[:errors].full_messages }
