@@ -3,8 +3,13 @@ module V1
     before_action :authenticate
 
     def index
-      @bucketlist = Bucketlist.all_bucketlists(@current_user.id)
-      render json: @bucketlist, status: 200
+      if params[:q].present?
+        @bucketlist = Bucketlist.search(@current_user.id, params[:q])
+        render json: @bucketlist, status: 200
+      else
+        @bucketlist = paginate(params[:limit], params[:page])
+        render json: @bucketlist, status: 200
+      end
     end
 
     def show
@@ -31,14 +36,28 @@ module V1
       if @bucketlist.update(bucketlist_params)
         render json: @bucketlist, status: 202
       else
-        format.json { render :show, status: :ok, location: @booking }
+        render json: @bucketlist, status: :ok, location: @bucketlist
+      end
+    end
+
+    def destroy
+      @bucketlist = Bucketlist.find(params[:id])
+      if @bucketlist.destroy
+        render json: { Deleted: "Bucketlist with its items, has been deleted" }
       end
     end
 
     private
 
     def bucketlist_params
-      params.permit(:id, :name, :publicity)
+      params.permit(:id, :name, :publicity, :limit, :page, :q)
+    end
+
+    def paginate(limit, page)
+      # binding.pry
+      lists = limit.to_i * page.to_i
+      set = lists - limit.to_i
+      Bucketlist.blists(@current_user.id).limit(limit).offset(set)
     end
   end
 end
