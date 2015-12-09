@@ -6,7 +6,6 @@ gem "rails", "4.2.4"
 gem "rails-api"
 gem "coveralls", require: false
 gem "spring", group: :development
-gem "sqlite3"
 gem "responders", "~> 2.0"
 gem "jwt"
 gem "figaro", "~> 1.0.0"
@@ -30,4 +29,11 @@ group :development, :test do
   gem "pry"
   gem "rspec-rails", "~> 3.0"
   # gem "codeclimate-test-reporter"
+end
+group :development do
+  gem "sqlite3"
+end
+group :production do
+  gem "pg"
+  gem 'rails_12factor'
 end
