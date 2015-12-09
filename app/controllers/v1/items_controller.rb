@@ -29,6 +29,13 @@ module V1
       render json: @item
     end
 
+    def destroy
+      @item = Item.find(params[:id])
+      if @item.destroy
+          render json: { Deleted: "Item has been deleted" }
+      end
+    end
+
     private
 
     def item_params

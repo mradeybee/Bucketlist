@@ -36,9 +36,16 @@ module V1
       if @bucketlist.update(bucketlist_params)
         render json: @bucketlist, status: 202
       else
-        format.json { render :show, status: :ok, location: @booking }
+        render json: @bucketlist, status: :ok, location: @bucketlist
       end
     end
+
+    def destroy
+    @bucketlist = Bucketlist.find(params[:id])
+    if @bucketlist.destroy
+        render json: { Deleted: "Bucketlist with its items, has been deleted" }
+    end
+  end
 
     private
 
