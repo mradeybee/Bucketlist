@@ -22,7 +22,7 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 400, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    assert_equal error["Error"], "Bucketlist not created"
+    assert_equal error["name"][0], "can't be blank"
   end
 
   test "Shows users bucketlists and others public bucketlists" do
@@ -111,7 +111,7 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 400, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    assert_equal error["Error"], "Update not successfull"
+    assert_equal error["name"][0], "can't be blank"
   end
 
   test "deletes bucketlist" do

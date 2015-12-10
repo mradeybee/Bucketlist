@@ -10,17 +10,13 @@ module V1
       render json: @item
     end
 
-    def new
-      @item = Item.new(item_params) if item_params
-      render json: @item
-    end
-
-    def edit
-    end
-
     def create
-      @item = Item.create(item_params) if item_params
-      render json: @item
+      @item = Item.new(item_params)
+      if @item.save
+        render json: @item, status: :created
+      else
+        render json:  @item.errors, status: 400
+      end
     end
 
     def update

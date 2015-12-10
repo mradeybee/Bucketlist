@@ -30,7 +30,7 @@ module V1
       if @bucketlist.save
         render json: @bucketlist, status: :created
       else
-        render json: { Error: "Bucketlist not created" }, status: 400
+        render json:  @bucketlist.errors, status: 400
       end
     end
 
@@ -39,7 +39,7 @@ module V1
       if @bucketlist.update(bucketlist_params)
         render json: @bucketlist, status: 202
       else
-        render json: { Error: "Update not successfull" }, status: 400
+        render json: @bucketlist.errors, status: 400
       end
     end
 

@@ -28,5 +28,14 @@ module ActionDispatch
         "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
       end
     end
+
+    def create_item
+      create_bucketlist
+      5.times do post "/v1/bucketlists/1/items",
+        { name: "My item", details: "first item", done: true }.to_json,
+      {"Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+      end
+    end
   end
 end
