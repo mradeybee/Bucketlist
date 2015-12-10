@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::Serialization
 
   def no_route_found
-    found = { Error: "The end point you requested does not exixt.",
+    found = { Error: "The end point you requested does not exist.",
               Debug: "Please check the documentation for existing end points" }
     render json: found, status: 404
   end

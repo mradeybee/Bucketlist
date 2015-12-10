@@ -4,31 +4,34 @@ module V1
 
     def index
       if params[:q].present?
-        @bucketlist = Bucketlist.search(@current_user.id, params[:q])
+        search = Bucketlist.search(@current_user.id, params[:q])
+        @bucketlist = paginate(search, "search", params[:limit], params[:page])
         render json: @bucketlist, status: 200
       else
-        @bucketlist = paginate(params[:limit], params[:page])
+        blists = Bucketlist.blists(@current_user.id)
+        @bucketlist = paginate(blists, "index", params[:limit], params[:page])
         render json: @bucketlist, status: 200
       end
     end
 
     def show
-      @bucketlist = Bucketlist.find(params[:id])
-      render json: @bucketlist
-    end
-
-    def new
-      @bucketlist = Bucketlist.new(bucketlist_params) if bucketlist_params
-      render json: @bucketlist
-    end
-
-    def edit
+      @bucketlist = Bucketlist.find_by(id: params[:id])
+      not_found = "Bucketlist with id #{params[:id]} is not found"
+      if @bucketlist.nil?
+        render json: { not_found!: not_found }
+      else
+        render json: @bucketlist
+      end
     end
 
     def create
       data = bucketlist_params.merge!(user_id: @current_user.id)
-      @bucketlist = Bucketlist.create(data) if bucketlist_params
-      render json: @bucketlist, status: 200
+      @bucketlist = Bucketlist.new(data)
+      if @bucketlist.save
+        render json: @bucketlist, status: :created
+      else
+        render json:  @bucketlist.errors, status: 400
+      end
     end
 
     def update
@@ -36,7 +39,7 @@ module V1
       if @bucketlist.update(bucketlist_params)
         render json: @bucketlist, status: 202
       else
-        render json: @bucketlist, status: :ok, location: @bucketlist
+        render json: @bucketlist.errors, status: 400
       end
     end
 
@@ -53,11 +56,21 @@ module V1
       params.permit(:id, :name, :publicity, :limit, :page, :q)
     end
 
-    def paginate(limit, page)
-      # binding.pry
+    def paginate(methods, type, page = nil, limit = nil)
       lists = limit.to_i * page.to_i
       set = lists - limit.to_i
-      Bucketlist.blists(@current_user.id).limit(limit).offset(set)
+      result = methods.limit(limit).offset(set)
+      check_resut(result, type)
+    end
+
+    def check_resut(result, type)
+      if type == "search" && result.empty?
+        return { Oops!: "Bucketlist named '#{params[:q]}' not found" }
+      elsif type == "index" && result.empty?
+        return { Oops!: "Bucketlist is empty" }
+      else
+        result
+      end
     end
   end
 end

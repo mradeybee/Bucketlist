@@ -8,12 +8,15 @@ Rails.application.routes.draw do
     end
   end
   get "*unmatched_route", to: "application#no_route_found"
+  put "*unmatched_route", to: "application#no_route_found"
+  patch "*unmatched_route", to: "application#no_route_found"
+  post "*unmatched_route", to: "application#no_route_found"
+  delete "*unmatched_route", to: "application#no_route_found"
   # The priority is based upon order of creation: first created ->
   # highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root "welcome#index"
 
   # Example of regular route:
   #   get "products/:id" => "catalog#view"
