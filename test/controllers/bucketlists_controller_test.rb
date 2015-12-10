@@ -38,13 +38,25 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "Shows bucketlist by id" do
     create_bucketlist
-    get "/v1/bucketlists",{id: 1},
+    get "/v1/bucketlists/1",{},
     {"Accept" => Mime::JSON,
       "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
-    assert_equal bucketlist["bucketlists"][0]["name"], "My first list"
+    assert_equal bucketlist["bucketlist"]["name"], "My first list"
+  end
+
+  test "Shows error message if bucketlist id is not found" do
+    create_bucketlist
+    missing = "Bucketlist with id 100 is not found"
+    get "/v1/bucketlists/100",{},
+    {"Accept" => Mime::JSON,
+      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    assert_equal 200, response.status
+    assert_equal Mime::JSON, response.content_type
+    bucketlist = JSON.parse(response.body)
+    assert_equal bucketlist["not_found!"], missing
   end
 
   test "Paginates users bucketlists and others public bucketlists" do
@@ -80,7 +92,7 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
     assert_equal not_found["Oops!"], "Bucketlist named 'My list' not found"
   end
 
-  test "edits bucketlist" do
+  test "updates bucketlist" do
     create_bucketlist
     patch "/v1/bucketlists/1",{ name: "My edited bucketlist" }.to_json,
     {"Accept" => Mime::JSON,
@@ -89,6 +101,17 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
     assert_equal bucketlist["bucketlist"]["name"], "My edited bucketlist"
+  end
+
+  test "rejects bad updates for bucketlist" do
+    create_bucketlist
+    patch "/v1/bucketlists/1",{ name: nil }.to_json,
+    {"Accept" => Mime::JSON,
+      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    assert_equal 400, response.status
+    assert_equal Mime::JSON, response.content_type
+    error = JSON.parse(response.body)
+    assert_equal error["Error"], "Update not successfull"
   end
 
   test "deletes bucketlist" do

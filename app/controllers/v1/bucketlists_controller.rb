@@ -15,8 +15,13 @@ module V1
     end
 
     def show
-      @bucketlist = Bucketlist.find(params[:id])
-      render json: @bucketlist
+      @bucketlist = Bucketlist.find_by(id: params[:id])
+      not_found = "Bucketlist with id #{params[:id]} is not found"
+      if @bucketlist.nil?
+        render json: { not_found!: not_found  }
+      else
+        render json: @bucketlist
+      end
     end
 
     def create
@@ -34,7 +39,7 @@ module V1
       if @bucketlist.update(bucketlist_params)
         render json: @bucketlist, status: 202
       else
-        render json: @bucketlist, status: :ok, location: @bucketlist
+        render json: { Error: "Update not successfull" }, status: 400
       end
     end
 

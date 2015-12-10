@@ -92,4 +92,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
     assert_equal 202, response.status
   end
+
+  test "Rejects bad updates for Athorized Users" do
+    @auth_token = login
+    patch "/v1/users/#{@user.id}",
+    { name: "Adepoju", email: "adeybee.com",
+      password: "password" }.to_json,
+    {"Accept" => Mime::JSON,
+      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    assert_equal Mime::JSON, response.content_type
+    error = JSON.parse(response.body)
+    assert_equal error["Error"], "Update not successfull"
+    assert_equal 400, response.status
+  end
 end
