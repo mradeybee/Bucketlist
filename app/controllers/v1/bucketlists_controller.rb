@@ -5,11 +5,11 @@ module V1
     def index
       if params[:q].present?
         search = Bucketlist.search(@current_user.id, params[:q])
-        @bucketlist = paginate(search, params[:limit], params[:page], "search")
+        @bucketlist = paginate(search, "search", params[:limit], params[:page])
         render json: @bucketlist, status: 200
       else
         blists = Bucketlist.blists(@current_user.id)
-        @bucketlist = paginate(blists, params[:limit], params[:page], "index")
+        @bucketlist = paginate(blists, "index", params[:limit], params[:page])
         render json: @bucketlist, status: 200
       end
     end
@@ -18,7 +18,7 @@ module V1
       @bucketlist = Bucketlist.find_by(id: params[:id])
       not_found = "Bucketlist with id #{params[:id]} is not found"
       if @bucketlist.nil?
-        render json: { not_found!: not_found  }
+        render json: { not_found!: not_found }
       else
         render json: @bucketlist
       end
@@ -56,7 +56,7 @@ module V1
       params.permit(:id, :name, :publicity, :limit, :page, :q)
     end
 
-    def paginate(methods, limit = nil, page = nil, type)
+    def paginate(methods, type, page = nil, limit = nil)
       lists = limit.to_i * page.to_i
       set = lists - limit.to_i
       result = methods.limit(limit).offset(set)

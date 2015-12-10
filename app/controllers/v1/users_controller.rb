@@ -16,7 +16,7 @@ module V1
       if user.update(user_params)
         render json: user, status: 202
       else
-         render json: { Error: "Update not successfull" }, status: 400
+        render json: { Error: "Update not successfull" }, status: 400
       end
     end
 

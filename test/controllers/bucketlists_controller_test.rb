@@ -4,9 +4,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
   test "creates a bucketlist" do
     auth_token = login
     post "/v1/bucketlists/",
-    { name: "My first list", publicity: true }.to_json,
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => auth_token }
+         { name: "My first list", publicity: true }.to_json,
+         "Accept" => Mime::JSON,
+         "Content-Type" => Mime::JSON.to_s, "Authorization" => auth_token
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
@@ -16,9 +16,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
   test "rejects bucketlists without name" do
     auth_token = login
     post "/v1/bucketlists/",
-    { name: nil, publicity: true }.to_json,
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => auth_token }
+         { name: nil, publicity: true }.to_json,
+         "Accept" => Mime::JSON,
+         "Content-Type" => Mime::JSON.to_s, "Authorization" => auth_token
     assert_equal 400, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
@@ -27,9 +27,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "Shows users bucketlists and others public bucketlists" do
     auth_token = login
-    get "/v1/bucketlists",{},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => auth_token }
+    get "/v1/bucketlists", {},
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     no_list = JSON.parse(response.body)
@@ -38,9 +38,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "Shows bucketlist by id" do
     create_bucketlist
-    get "/v1/bucketlists/1",{},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    get "/v1/bucketlists/1", {},
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
@@ -50,9 +50,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
   test "Shows error message if bucketlist id is not found" do
     create_bucketlist
     missing = "Bucketlist with id 100 is not found"
-    get "/v1/bucketlists/100",{},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    get "/v1/bucketlists/100", {},
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
@@ -61,9 +61,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "Paginates users bucketlists and others public bucketlists" do
     create_bucketlist
-    get "/v1/bucketlists",{page: 2, limit: 2},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    get "/v1/bucketlists", { page: 2, limit: 2 },
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
@@ -73,9 +73,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "searches users bucketlists and others public bucketlists by name" do
     create_bucketlist
-    get "/v1/bucketlists",{q: "My first list"},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    get "/v1/bucketlists", { q: "My first list" },
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
@@ -83,9 +83,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
   end
   test "shows not found result for non exiisting queries" do
     create_bucketlist
-    get "/v1/bucketlists",{q: "My list"},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    get "/v1/bucketlists", { q: "My list" },
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     not_found = JSON.parse(response.body)
@@ -94,9 +94,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "updates bucketlist" do
     create_bucketlist
-    patch "/v1/bucketlists/1",{ name: "My edited bucketlist" }.to_json,
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    patch "/v1/bucketlists/1", { name: "My edited bucketlist" }.to_json,
+          "Accept" => Mime::JSON,
+          "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 202, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)
@@ -105,9 +105,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "rejects bad updates for bucketlist" do
     create_bucketlist
-    patch "/v1/bucketlists/1",{ name: nil }.to_json,
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    patch "/v1/bucketlists/1", { name: nil }.to_json,
+          "Accept" => Mime::JSON,
+          "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 400, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
@@ -116,9 +116,9 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "deletes bucketlist" do
     create_bucketlist
-    delete "/v1/bucketlists/1",{},
-    {"Accept" => Mime::JSON,
-      "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    delete "/v1/bucketlists/1", {},
+           "Accept" => Mime::JSON,
+           "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     done = JSON.parse(response.body)
