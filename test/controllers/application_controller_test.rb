@@ -24,7 +24,7 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "checks expired session" do
-    @auth_token = ENV["EXPIRED_TOKEN"]
+    @auth_token = EXPIRED_TOKEN
     get "/v1/bucketlists", {},
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
