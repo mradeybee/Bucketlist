@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   namespace :v1 do
     post "auth/login", to: "auth#login", as: "login"
     post "auth/logout", to: "auth#logout", as: "logout"
@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     end
   end
   get "*unmatched_route", to: "application#no_route_found"
+  put "*unmatched_route", to: "application#no_route_found"
+  patch "*unmatched_route", to: "application#no_route_found"
+  post "*unmatched_route", to: "application#no_route_found"
+  delete "*unmatched_route", to: "application#no_route_found"
   # The priority is based upon order of creation: first created ->
   # highest priority.
   # See how all your routes lay out with "rake routes".

@@ -20,6 +20,13 @@ module ActionDispatch
       result["token_key"]
     end
 
+    def logout
+      @auth_token = login
+      post "/v1/auth/logout",{ },
+      {"Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token }
+    end
+
     def create_bucketlist
       @auth_token = login
       5.times do post "/v1/bucketlists/",
