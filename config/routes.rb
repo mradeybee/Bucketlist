@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   namespace :v1 do
     post "auth/login", to: "auth#login", as: "login"
     post "auth/logout", to: "auth#logout", as: "logout"
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root "welcome#index"
 
   # Example of regular route:
   #   get "products/:id" => "catalog#view"

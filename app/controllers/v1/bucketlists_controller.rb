@@ -4,10 +4,12 @@ module V1
 
     def index
       if params[:q].present?
-        @bucketlist = Bucketlist.search(@current_user.id, params[:q])
+        search = Bucketlist.search(@current_user.id, params[:q])
+        @bucketlist = paginate(search, params[:limit], params[:page], "search")
         render json: @bucketlist, status: 200
       else
-        @bucketlist = paginate(params[:limit], params[:page])
+        blists = Bucketlist.blists(@current_user.id)
+        @bucketlist = paginate(blists, params[:limit], params[:page], "index")
         render json: @bucketlist, status: 200
       end
     end
@@ -17,18 +19,14 @@ module V1
       render json: @bucketlist
     end
 
-    def new
-      @bucketlist = Bucketlist.new(bucketlist_params) if bucketlist_params
-      render json: @bucketlist
-    end
-
-    def edit
-    end
-
     def create
       data = bucketlist_params.merge!(user_id: @current_user.id)
-      @bucketlist = Bucketlist.create(data) if bucketlist_params
-      render json: @bucketlist, status: 200
+      @bucketlist = Bucketlist.new(data)
+      if @bucketlist.save
+        render json: @bucketlist, status: :created
+      else
+        render json: { Error: "Bucketlist not created" }, status: 400
+      end
     end
 
     def update
@@ -53,11 +51,21 @@ module V1
       params.permit(:id, :name, :publicity, :limit, :page, :q)
     end
 
-    def paginate(limit, page)
-      # binding.pry
+    def paginate(methods, limit = nil, page = nil, type)
       lists = limit.to_i * page.to_i
       set = lists - limit.to_i
-      Bucketlist.blists(@current_user.id).limit(limit).offset(set)
+      result = methods.limit(limit).offset(set)
+      check_resut(result, type)
+    end
+
+    def check_resut(result, type)
+      if type == "search" && result.empty?
+        return { Oops!: "Bucketlist named '#{params[:q]}' not found" }
+      elsif type == "index" && result.empty?
+        return { Oops!: "Bucketlist is empty" }
+      else
+        result
+      end
     end
   end
 end

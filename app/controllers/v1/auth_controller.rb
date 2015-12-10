@@ -4,7 +4,7 @@ module V1
     def login
       user = User.find_by(email: auth_params[:email])
       if user.nil?
-        render json: { Error: "Invalid Email" }, status: 401
+        render json: { Error: "Invalid Email" }.to_json, status: 401
       elsif user.authenticate(auth_params[:password])
         user.active = true
         user.save
