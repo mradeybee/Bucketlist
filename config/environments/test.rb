@@ -11,7 +11,7 @@ Rails.application.configure do
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
   config.eager_load = false
-  EXPIRED_TOKEN="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MSwiZW1haWwiOiJtcmFkZXliZWVAZ21haWwuY29tIiwiZXhwIjoxNDQ5NzY5MDMwfQ.ilHZJIR-y3qo13U_dfXJwk_Rdo143TGBEjTMGrLu7tzxUt6vYJbUFrz-8zsDYKVX-jjZEUO5ouYCAYX0Q5-cvw"
+  EXPIRED_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MSwiZW1haWwiOiJtcmFkZXliZWVAZ21haWwuY29tIiwiZXhwIjoxNDQ5NzY5MDMwfQ.ilHZJIR-y3qo13U_dfXJwk_Rdo143TGBEjTMGrLu7tzxUt6vYJbUFrz-8zsDYKVX-jjZEUO5ouYCAYX0Q5-cvw"
   # Configure static file server for tests with Cache-Control for performance.
   config.serve_static_files   = true
   config.static_cache_control = 'public, max-age=3600'
