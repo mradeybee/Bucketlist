@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :v1 do
     post "auth/login", to: "auth#login", as: "login"
-    post "auth/logout", to: "auth#logout", as: "logout"
+    get "auth/logout", to: "auth#logout", as: "logout"
     resources :users
     resources :bucketlists do
       resources :items
