@@ -73,19 +73,19 @@ GET https://beebuckets.herokuapp.com/v1/bucketlists?page=2&limit=20
 20 bucket list records belonging to the logged in user starting from the 21st bucket list .
 ```
 
-## Searching by Name
-Users can search for bucket list by its name using a `GET parameter` `q`.
-#### Example
+  ## Searching by Name
+  Users can search for bucket list by its name using a `GET parameter` `q`.
+  #### Example
 
-**Request:**
-```
-GET https://beebuckets.herokuapp.com/v1/bucketlists?q=bucket1
-```
+  **Request:**
+  ```
+  GET https://beebuckets.herokuapp.com/v1/bucketlists?q=bucket1
+  ```
 
-**Response:**
-```
-Bucket lists with the string “bucket1” in their name.
-```
+  **Response:**
+  ```
+  Bucket lists with the string “bucket1” in their name.
+  ```
 
 ## Versions
 This API has only one version for now, and it can be accessed via -
