@@ -97,7 +97,7 @@ https://beebuckets.herokuapp.com/v1/endpoint
  This API is currently hosted on:
  [https://beebuckets.herokuapp.com/v1/](https://beebuckets.herokuapp.com/v1)
 
- ## Contribution
+ ## Contributions
  This API is open source and contributions are welcomed. You can clone the [Github](https://github.com/andela-aadepoju/Bucketlist) repository and raise a `pull request` for your contributions.  
 
  Thank You
