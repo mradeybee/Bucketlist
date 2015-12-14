@@ -8,19 +8,19 @@ module V1
         @bucketlist = paginate(search, "search", params[:limit], params[:page])
         render json: @bucketlist, status: 200
       else
-        blists = Bucketlist.blists(@current_user.id)
-        @bucketlist = paginate(blists, "index", params[:limit], params[:page])
+        lists = Bucketlist.lists(@current_user.id)
+        @bucketlist = paginate(lists, "index", params[:limit], params[:page])
         render json: @bucketlist, status: 200
       end
     end
 
     def show
-      @bucketlist = Bucketlist.find_by(id: params[:id])
-      not_found = "Bucketlist with id #{params[:id]} is not found"
-      if @bucketlist.nil?
+      bucketlist = Bucketlist.find_list(params[:id], @current_user.id)
+      not_found = "Bucketlist with id #{params[:id]} does not exist"
+      if bucketlist.nil?
         render json: { not_found!: not_found }
       else
-        render json: @bucketlist
+        render json: bucketlist
       end
     end
 

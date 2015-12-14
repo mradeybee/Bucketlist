@@ -47,9 +47,22 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
     assert_equal bucketlist["bucketlist"]["name"], "My first list"
   end
 
+  test "denies search for bucketlist by id not belongin to user" do
+    create_bucketlist
+    another_bucketlist
+    cant_view = "You are not permited to view this bucketlist"
+    get "/v1/bucketlists/1", {},
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @new_token
+    assert_equal 200, response.status
+    assert_equal Mime::JSON, response.content_type
+    bucketlist = JSON.parse(response.body)
+    assert_equal bucketlist["unauthorized"], cant_view
+  end
+
   test "Shows error message if bucketlist id is not found" do
     create_bucketlist
-    missing = "Bucketlist with id 100 is not found"
+    missing = "Bucketlist with id 100 does not exist"
     get "/v1/bucketlists/100", {},
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
