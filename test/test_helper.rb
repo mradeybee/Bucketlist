@@ -22,7 +22,7 @@ module ActionDispatch
 
     def logout
       @auth_token = login
-      post "/v1/auth/logout", {},
+      get "/v1/auth/logout", {},
            "Accept" => Mime::JSON,
            "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     end

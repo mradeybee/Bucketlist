@@ -742,14 +742,14 @@
   },
   "MiniTest": {
     "coverage": {
-      "/home/andela/workspace/bucket-list/config/environment.rb": [
+      "/home/adeybee/workspace/bucket-list/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/andela/workspace/bucket-list/config/environments/test.rb": [
+      "/home/adeybee/workspace/bucket-list/config/environments/test.rb": [
         1,
         null,
         null,
@@ -793,13 +793,13 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/config/initializers/filter_parameter_logging.rb": [
+      "/home/adeybee/workspace/bucket-list/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/andela/workspace/bucket-list/config/initializers/secret_token.rb": [
+      "/home/adeybee/workspace/bucket-list/config/initializers/secret_token.rb": [
         null,
         null,
         null,
@@ -822,7 +822,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/config/initializers/wrap_parameters.rb": [
+      "/home/adeybee/workspace/bucket-list/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -837,7 +837,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/config/routes.rb": [
+      "/home/adeybee/workspace/bucket-list/config/routes.rb": [
         1,
         1,
         1,
@@ -909,7 +909,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/models/user.rb": [
+      "/home/adeybee/workspace/bucket-list/app/models/user.rb": [
         1,
         1,
         1,
@@ -923,7 +923,7 @@
         1,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/controllers/v1/auth_controller.rb": [
+      "/home/adeybee/workspace/bucket-list/app/controllers/v1/auth_controller.rb": [
         1,
         1,
         1,
@@ -956,7 +956,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/controllers/application_controller.rb": [
+      "/home/adeybee/workspace/bucket-list/app/controllers/application_controller.rb": [
         1,
         1,
         null,
@@ -985,7 +985,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/controllers/v1/authenticate.rb": [
+      "/home/adeybee/workspace/bucket-list/app/controllers/v1/authenticate.rb": [
         1,
         1,
         1,
@@ -1009,7 +1009,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/controllers/v1/bucketlists_controller.rb": [
+      "/home/adeybee/workspace/bucket-list/app/controllers/v1/bucketlists_controller.rb": [
         1,
         1,
         1,
@@ -1087,7 +1087,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/models/bucketlist.rb": [
+      "/home/adeybee/workspace/bucket-list/app/models/bucketlist.rb": [
         1,
         1,
         1,
@@ -1104,7 +1104,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/serializers/bucketlist_serializer.rb": [
+      "/home/adeybee/workspace/bucket-list/app/serializers/bucketlist_serializer.rb": [
         1,
         1,
         null,
@@ -1115,7 +1115,7 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/models/item.rb": [
+      "/home/adeybee/workspace/bucket-list/app/models/item.rb": [
         1,
         1,
         null,
@@ -1124,7 +1124,43 @@
         1,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/controllers/v1/items_controller.rb": [
+      "/home/adeybee/workspace/bucket-list/app/controllers/v1/users_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        6,
+        6,
+        1,
+        null,
+        5,
+        null,
+        null,
+        null,
+        1,
+        2,
+        2,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        8,
+        null,
+        null,
+        null
+      ],
+      "/home/adeybee/workspace/bucket-list/app/serializers/user_serializer.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/adeybee/workspace/bucket-list/app/controllers/v1/items_controller.rb": [
         1,
         1,
         1,
@@ -1167,48 +1203,12 @@
         null,
         null
       ],
-      "/home/andela/workspace/bucket-list/app/serializers/item_serializer.rb": [
-        1,
-        1,
-        null
-      ],
-      "/home/andela/workspace/bucket-list/app/controllers/v1/users_controller.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        6,
-        6,
-        1,
-        null,
-        5,
-        null,
-        null,
-        null,
-        1,
-        2,
-        2,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        null,
-        1,
-        8,
-        null,
-        null,
-        null
-      ],
-      "/home/andela/workspace/bucket-list/app/serializers/user_serializer.rb": [
+      "/home/adeybee/workspace/bucket-list/app/serializers/item_serializer.rb": [
         1,
         1,
         null
       ]
     },
-    "timestamp": 1449855808
+    "timestamp": 1450178932
   }
 }

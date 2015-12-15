@@ -39,7 +39,7 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
 
   test "logout user" do
     @auth_token = login
-    post "/v1/auth/logout", {},
+    get "/v1/auth/logout", {},
          "Accept" => Mime::JSON,
          "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
