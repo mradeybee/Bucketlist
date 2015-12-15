@@ -11,11 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="javascripts/all.js" type="text/javascript"></script>
 
-      <script>
-        $(function() {
-          setupLanguages(["json","ruby"]);
-        });
-      </script>
   </head>
 
   <body class="index">
@@ -26,11 +21,7 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.jpg" style="width: 250px; height: 100px;" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="json">json</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-        </div>
+      <img src="images/logo.png" style="width:229px"/>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -46,10 +37,20 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
+<pre class="highlight plaintext"><code>____                       ____             _        _
+|  _ \                     |  _ \           | |      | |
+| |_) | ___  ___   ______  | |_) |_   _  ___| | _____| |_ ___
+|  _ &lt; / _ \/ _ \ |______| |  _ &lt;| | | |/ __| |/ / _ \ __/ __|
+| |_) |  __/  __/          | |_) | |_| | (__|   &lt;  __/ |_\__ \
+|____/ \___|\___|          |____/ \__,_|\___|_|\_\___|\__|___/
 
-<p>This is an API for a bucket list service. Specification for the API is shown below.</p>
+</code></pre>
 
-<h1 id="end-points-functionalities">End Points Functionalities</h1>
+<p>This is an API for a bucket list service. A summary of the endpoints available on this API is represented in the table below</p>
+
+<p><a href="https://codeclimate.com/github/andela-aadepoju/Bucketlist"><img alt="Code Climate" src="https://codeclimate.com/github/andela-aadepoju/Bucketlist/badges/gpa.svg" /></a> <a href="https://coveralls.io/github/andela-aadepoju/Bucketlist?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/andela-aadepoju/Bucketlist/badge.svg?branch=master&amp;service=github" /></a></p>
+
+<p><strong>End Points Functionalities</strong></p>
 
 <table><thead>
 <tr>
@@ -99,32 +100,743 @@
 </tr>
 </tbody></table>
 
-<h1 id="data-model">Data Model</h1>
+<p>Details and usage of these endpoints can be found below.</p>
 
-<p>The JSON data model for a bucket list and a bucket list item is shown below.</p>
+          <h1 id="authentication">Authentication</h1>
+
+<h2 id="creating-users">Creating Users</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+<span class="s2">"name=Username&amp;email=user@email.com&amp;password=asecuredpassword!"</span> <span class="se">\</span>
+<span class="s2">"https://beebuckets.herokuapp.com/v1/users"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for good request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 201
+</code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="err">id:</span><span class="w"> </span><span class="err">1,</span><span class="w">
-    </span><span class="err">name:</span><span class="w"> </span><span class="err">“BucketList1”,</span><span class="w">
-    </span><span class="err">items:</span><span class="w"> </span><span class="err">[</span><span class="w">
-           </span><span class="err">{</span><span class="w">
-               </span><span class="err">id:</span><span class="w"> </span><span class="err">1,</span><span class="w">
-               </span><span class="err">name:</span><span class="w"> </span><span class="err">“I</span><span class="w"> </span><span class="err">need</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">do</span><span class="w"> </span><span class="err">X”,</span><span class="w">
-               </span><span class="err">date_created:</span><span class="w"> </span><span class="err">“2015-08-12</span><span class="w"> </span><span class="err">11:57:23”,</span><span class="w">
-               </span><span class="err">date_modified:</span><span class="w"> </span><span class="err">“2015-08-12</span><span class="w"> </span><span class="err">11:57:23”,</span><span class="w">
-               </span><span class="err">done:</span><span class="w"> </span><span class="err">False</span><span class="w">
-             </span><span class="p">}</span><span class="w">
-           </span><span class="err">]</span><span class="w">
-    </span><span class="err">date_created:</span><span class="w"> </span><span class="err">“</span><span class="mi">2015-08-12</span><span class="w"> </span><span class="mi">11</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">23</span><span class="err">”,</span><span class="w">
-    </span><span class="err">date_modified:</span><span class="w"> </span><span class="err">“</span><span class="mi">2015-08-12</span><span class="w"> </span><span class="mi">11</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">23</span><span class="err">”</span><span class="w">
-    </span><span class="err">created_by:</span><span class="w"> </span><span class="err">“Owner's</span><span class="w"> </span><span class="err">Name”</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@email.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="authentication">Authentication</h1>
+<blockquote>
+<p>Response for bad request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 400
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User not created"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="notice">
+  Before you can use the bucketlist service, you must be a registered user.
+</aside>
+
+<p>You can register by sending a <code class="prettyprint">POST</code> request to <a href="&quot;https://beebuckets.herokuapp.com/v1/users&quot;">&ldquo;https://beebuckets.herokuapp.com/v1/users&rdquo;</a></p>
+
+<p>Your request must have the following parameters:</p>
+
+<p><strong>Name</strong>: This is the user&rsquo;s name. This name will be displayed in all the bucketlists created by such user.</p>
+
+<p><strong>Email</strong>: A valid email is also required.</p>
+
+<p><strong>Password</strong>: User password is also required. The password must be at least 6 characters long</p>
+
+<p>If the registration is successful, you will get a result like response</p>
+
+<p>If the registration is not successful, you will get a result like response. When this happens, check your <code class="prettyprint">parameter</code> for errors.</p>
+
+          <h2 id="update-users-info">Update Users Info</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PATCH -d <span class="se">\</span>
+<span class="s2">"name=Username&amp;email=user@email.com&amp;password=asecuredpassword!"</span> <span class="se">\</span>
+<span class="s2">"https://beebuckets.herokuapp.com/v1/users"</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@email.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 400
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Update not successful"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="notice">
+  By now I assume you are a registered user.
+</aside>
+
+<p>You can update users details by sending a <code class="prettyprint">PATCH</code> or <code class="prettyprint">PUT</code> request to <a href="&quot;https://beebuckets.herokuapp.com/v1/users&quot;">&ldquo;https://beebuckets.herokuapp.com/v1/users&rdquo;</a></p>
+
+<p>Your request may have the following parameters:</p>
+
+<p><strong>Name</strong>: This is the user&rsquo;s name. If you wish to update the user&rsquo;s name.</p>
+
+<p><strong>Email</strong>: User email If you wish to update the user&rsquo;s email. This must be a valid email.</p>
+
+<p><strong>Password</strong>: User password If you wish to update the user&rsquo;s password.</p>
+
+<p>If the registration is successful, you will get a response like <code class="prettyprint">Response 2.0</code></p>
+
+<p>If the update is not successful, you will get a response like <code class="prettyprint">Response 2.1</code>. When this happens, check your <code class="prettyprint">parameter</code> for errors</p>
+
+          <h2 id="login">login</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+<span class="s2">"email=user@email.com&amp;password=asecuredpassword!"</span> <span class="se">\</span>
+<span class="s2">"https://beebuckets.herokuapp.com/v1/auth/login"</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"token_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MiwiZW1haWwiOiJkZXliZWVAZ21haWwuY29tIiwiZXhwIjoxNDUwMTI0OTEyfQ.Ponf4SZiPL55DhJ-C_fFNOw9yP1FAcDYzqyOJbownaMTNvFrhMwLrgs9SOp_pToUd-FDW_8Jy4xqDAkdVK5Mow"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 400
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Email"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 400
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Password"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can login by sending a <code class="prettyprint">POST</code> request to <a href="&quot;https://beebuckets.herokuapp.com/v1/auth/login&quot;">&ldquo;https://beebuckets.herokuapp.com/v1/auth/login&rdquo;</a></p>
+
+<p>Your request must have the following parameters:</p>
+
+<p><strong>Email</strong>: User email.</p>
+
+<p><strong>Password</strong>: User password.</p>
+
+<p>If the login is successful, you will get a result like the response. This is your authentication token. This will be required every time you make a request to the API. The value of the  token should be passed in the header section of the request. The token lasts for 5 hours.</p>
+
+<p>If the login is not successful, you will get a response like the responses shown. When this happens, check your <code class="prettyprint">email</code> or <code class="prettyprint">password</code> for errors.</p>
+
+          <h2 id="logout">Logout</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://beebuckets.herokuapp.com/v1/auth/logout"</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Logged out"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can logout by sending a <code class="prettyprint">GET</code> request to <a href="&quot;https://beebuckets.herokuapp.com/v1/auth/logout&quot;">&ldquo;https://beebuckets.herokuapp.com/v1/auth/logout&rdquo;</a></p>
+
+<p>Your request must have your authentication token passed along in the header.</p>
+
+<p>When you are logged out, you will get the result in response</p>
+
+          <h1 id="bucketlists">Bucketlists</h1>
+
+<h2 id="creating-bucketlist">Creating Bucketlist</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -d <span class="s2">"name=Bucket1&amp;publicity=true"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists"</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 201
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bucketlist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bucketlist Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publicity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 400
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"can't be blank"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="notice">
+  NOTE: You must be logged in to create a bucket list. Also make sure you pass your authentication token with in your request header.
+</aside>
+
+<p>To create a bucketlist, you need to send a  <code class="prettyprint">POST</code> request to <a href="&quot;https://beebuckets.herokuapp.com/v1/bucketlists&quot;">&ldquo;https://beebuckets.herokuapp.com/v1/bucketlists&rdquo;</a></p>
+
+<p>Your request must have your authentication token passed along in the header. Other <code class="prettyprint">parameter</code> include</p>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p><strong>Name</strong>: This is the bucketlist&rsquo;s name. This is <code class="prettyprint">required</code></p>
+
+<p><strong>Publicity</strong>: This will make your bucketlist public or not. It takes <code class="prettyprint">true</code> or <code class="prettyprint">false</code> as its value. To make your bucketlist public, set the value to true, and set it to false if you don&rsquo;t want it to be public. By default, this is <code class="prettyprint">false</code>.</p>
+
+<p>After successful creation, you will get a response similar to the responses.</p>
+
+<p>If any error occurs during the creation, You will get error messages of what went wrong. Example,responses</p>
+
+<h2 id="viewing-bucketlists">Viewing Bucketlists</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET -d <span class="s2">"id=1"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for bucketlist requested</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bucketlist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bucketlist Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publicity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To view a bucketlist, you need to send a  <code class="prettyprint">GET</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist you want to view.
+This example assumes you want to view bucketlist with id 1
+</aside>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p>When the bucketlist is found, you will get the details of the  as shown in the response.</p>
+
+<h2 id="updating-bucketlist">Updating Bucketlist</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PATCH -d <span class="s2">"name=Updated Bucketlist Name&amp;publicity=true"</span> -H <span class="s2">"Authorization: Token"</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for successful update</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bucketlist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated Bucketlist Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publicity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To update a bucketlist, you need to send a  <code class="prettyprint">PATCH</code> or <code class="prettyprint">PUT</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist you want to update.
+This example assumes you want to edit bucketlist with id 1
+</aside>
+
+<p>A bucketlist has 2 parameters, and you can pass the parameter you want to update.</p>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p><strong>Name</strong>:  Name</p>
+
+<p><strong>Publicity</strong>: This is a boolean  field, it takes <code class="prettyprint">true</code> or <code class="prettyprint">false</code> as its value.
+ This ought to make your bucketlist public or not</p>
+
+<p>When the bucketlist is successfuly updated, you will get the details as shown in the response.</p>
+
+<h2 id="deleting-bucketlist">Deleting Bucketlist</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X DELETE -d <span class="s2">"id=1"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for delete</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Deleted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bucketlist with its items, has been deleted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To delete a bucketlist, you need to send a  <code class="prettyprint">DELETE</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist you want to delete. This example assumes you want to delete bucketlist with id 1
+</aside>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p>When the bucketlist is successfuly deleted, you will get a confirmation message as shown in the response.</p>
+
+<h1 id="items">Items</h1>
+
+<h2 id="adding-items-to-bucketlist">Adding Items to Bucketlist</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -d <span class="s2">"name=new item&amp;details=this is an item in this list&amp;done=false"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1/items"</span>
+</code></pre>
+
+<blockquote>
+<p>Response successful item creation</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 201
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new item"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To add an item to a bucketlist, you need to send a  <code class="prettyprint">POST</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1/items</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist you want to add items to. This example assumes you want to add items to bucketlist with id 1
+</aside>
+
+<p>An item requires 3 parameter.</p>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p><strong>Name</strong>: Item Name</p>
+
+<p><strong>Details</strong>: A description of what the item is all about</p>
+
+<p><strong>Done</strong>: This is a boolean  field, it takes <code class="prettyprint">true</code> or <code class="prettyprint">false</code> as its value. This ought to indicates if the item has been done or not</p>
+
+<p>When an item is successfully created, you will get the details of the item as shown in the response.</p>
+
+<h2 id="viewing-items">Viewing Items</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET -d <span class="s2">"id=1"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1/items"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for requested item</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new item"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To view an item in a bucketlist, you need to send a  <code class="prettyprint">GET</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1/items/1</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist and the item you want to view. This example assumes you want to view item with id 1 in bucketlist with id 1
+</aside>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p>When the item is found, you will get the details of the item as shown in the response.</p>
+
+<h2 id="updating-items">Updating Items</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PATCH -d <span class="s2">"name=Item1&amp;details=this is an updated item in this list&amp;done=true"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1/items/1"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for successful update</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"updated item"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an updated item in this list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To update an item in a bucketlist, you need to send a  <code class="prettyprint">PATCH</code> or <code class="prettyprint">PUT</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1/items/1</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist and the item you want to update. This example assumes you want to edit item with id 1 in bucketlist with id 1
+</aside>
+
+<p>An item has 3 parameters, and you can pass the parameter you want to update.</p>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p><strong>Name</strong>: Item Name</p>
+
+<p><strong>Details</strong>: A description of what the item is all about</p>
+
+<p><strong>Done</strong>: This is a booolean  field, it takes <code class="prettyprint">true</code> or <code class="prettyprint">false</code> as its value. This ought to indicates if the item has been done or not</p>
+
+<p>When an item is successfuly updated, you will get the details of the item as shown in the response.</p>
+
+<h2 id="deleting-items">Deleting Items</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X DELETE -d <span class="s2">"id=1"</span> -H <span class="se">\</span>
+<span class="s2">"Authorization: Token"</span> <span class="se">\</span>
+<span class="s2">"https://a-bucketlist.herokuapp.com/api/v1/bucketlists/1/items/1"</span>
+</code></pre>
+
+<blockquote>
+<p>Response for successful update</p>
+</blockquote>
+<pre class="highlight plaintext"><code>HTTP Status: 200
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"updated item"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an updated item in this list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To delete an item in a bucketlist, you need to send a  <code class="prettyprint">DELETE</code> request to <code class="prettyprint">https://beebuckets.herokuapp.com/v1/bucketlists/1/items/1</code></p>
+
+<aside class="notice">
+NOTE: The /1/ between the url above represents the id of the bucketlist and the item you want to update. This example assumes you want to edit item with id 1 in bucketlist with id 1
+</aside>
+
+<aside class="success">
+You need to pass your authentication token in your request header.
+</aside>
+
+<p>When an item is successfuly deleted, you will get a confirmation message as shown in the response.</p>
+
+          <h1 id="search">Search</h1>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET https://beebuckets.herokuapp.com/v1/bucketlists?q=BucketlistName
+</code></pre>
+
+<blockquote>
+<p>Response if bucketlist is found</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bucketlist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BucketlistName"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This Item"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publicity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response if bucketlist is not found</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Oops!"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bucketlist named 'BucketlistName' not found"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can search for a bucketlist by its name by using the <code class="prettyprint">q</code> parameter.</p>
+
+<p>The illustration on the right pane shows how the search query can be done.
+You have to send a <code class="prettyprint">GET</code> requst with <code class="prettyprint">q</code> as a parameter. You will then assign
+the bucketlist name to <code class="prettyprint">q</code> as shown in the request.</p>
+
+<p>If the bucketlist exist, you will get a result like the first response. If the bucketlist
+doesn&rsquo;t exist, you will get the result in the second response</p>
+
+          <h1 id="pagination">Pagination</h1>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET https://beebuckets.herokuapp.com/v1/bucketlists?limit=2&amp;page=2
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bucketlist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Third Bucketlist Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This Item"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publicity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fourth Bucketlist Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"That Item"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is an item in this list"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T22:23:17.646Z"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T16:51:06.437Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publicity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can paginate your queries such that you can specify the number of results you would like
+to have and the page you want.</p>
+
+<p><strong>Example</strong></p>
+
+<p>If you send a <code class="prettyprint">GET</code> request for bucketlists, you can paginate the result by passing the <code class="prettyprint">limit</code> and <code class="prettyprint">page</code>
+parameters. So if you set the value of <code class="prettyprint">limit</code> to 2 and the value of <code class="prettyprint">page</code> to 1, you will get the first two results
+of the bucketlists requested. if you increase the page valuse to 2, you will get the next two results.</p>
+
+<p>The illustration on the right pane shows the results of the bucketlists limited to 2 results and on page 2.</p>
+
+<h1 id="versions">Versions</h1>
+
+<p>This API has only one version for now, and it can be accessed via - https://beebuckets.herokuapp.com/v1/endpoint</p>
+
+<h1 id="use-online">Use Online</h1>
+
+<p>This API is currently hosted on: https://beebuckets.herokuapp.com/</p>
+
+          <h1 id="summary">Summary</h1>
+
+<h2 id="end-points-functionalities">End Points Functionalities</h2>
+
+<table><thead>
+<tr>
+<th>End Point</th>
+<th style="text-align: center">Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>POST /auth/login:</strong></td>
+<td style="text-align: center">Logs a user in</td>
+</tr>
+<tr>
+<td><strong>GET /auth/logout:</strong></td>
+<td style="text-align: center">Logs a user out</td>
+</tr>
+<tr>
+<td><strong>POST /bucketlists:</strong></td>
+<td style="text-align: center">Creates a new bucket list</td>
+</tr>
+<tr>
+<td><strong>GET /bucketlists:</strong></td>
+<td style="text-align: center">Lists all the created bucket lists</td>
+</tr>
+<tr>
+<td><strong>GET /bucketlists/(id):</strong></td>
+<td style="text-align: center">Gets a single bucket list</td>
+</tr>
+<tr>
+<td><strong>PUT /bucketlists/(id):</strong></td>
+<td style="text-align: center">Updates this single bucket list</td>
+</tr>
+<tr>
+<td><strong>DELETE /bucketlists/(id):</strong></td>
+<td style="text-align: center">Deletes this single bucket list</td>
+</tr>
+<tr>
+<td><strong>POST /bucketlists/(id)/items:</strong></td>
+<td style="text-align: center">Creates a new item in bucket list</td>
+</tr>
+<tr>
+<td><strong>PUT /bucketlists/(id)/items/(item_id):</strong></td>
+<td style="text-align: center">Updates a bucket list item</td>
+</tr>
+<tr>
+<td><strong>DELETE /bucketlists/(id)/items/(item_id):</strong></td>
+<td style="text-align: center">Deletes an item in a bucket list</td>
+</tr>
+</tbody></table>
+
+<h2 id="authentication">Authentication</h2>
 
 <p>Json Web Tokens(JWT), Token Based System was used for this API. With this, some end points are not accessible to unauthenticated users. Access control mapping is listed below.</p>
 
-<h2 id="end-point-and-public-access">End Point and Public Access</h2>
+<h3 id="end-point-and-public-access">End Point and Public Access</h3>
 
 <table><thead>
 <tr>
@@ -174,11 +886,11 @@
 </tr>
 </tbody></table>
 
-<h1 id="pagination">Pagination</h1>
+<h2 id="pagination">Pagination</h2>
 
 <p>This API is paginated such that users can specify the number of results they would like to have via a <code class="prettyprint">GET parameter</code> <code class="prettyprint">limit</code>.</p>
 
-<h2 id="example">Example</h2>
+<h4 id="example">Example</h4>
 
 <p><strong>Request:</strong>
 <code class="prettyprint">
@@ -190,48 +902,32 @@ GET https://beebuckets.herokuapp.com/v1/bucketlists?page=2&amp;limit=20
 20 bucket list records belonging to the logged in user starting from the 21st bucket list .
 </code></p>
 
-<h1 id="searching-by-name">Searching by Name</h1>
+<h2 id="searching-by-name">Searching by Name</h2>
 
 <p>Users can search for bucket list by its name using a <code class="prettyprint">GET parameter</code> <code class="prettyprint">q</code>.</p>
 
-<h2 id="example">Example</h2>
+<h4 id="example">Example</h4>
 
 <p><strong>Request:</strong>
-<code class="prettyprint">
-GET https://beebuckets.herokuapp.com/v1/bucketlists?q=bucket1
+  <code class="prettyprint">
+  GET https://beebuckets.herokuapp.com/v1/bucketlists?q=bucket1
 </code></p>
 
 <p><strong>Response:</strong>
-<code class="prettyprint">
-Bucket lists with the string “bucket1” in their name.
+  <code class="prettyprint">
+  Bucket lists with the string “bucket1” in their name.
 </code></p>
-
-<h1 id="versions">Versions</h1>
-
-<p>This API has only one version for now, and it can be accessed via -
-<code class="prettyprint">
-https://beebuckets.herokuapp.com/v1/endpoint
-</code></p>
-
-<h1 id="use-online">Use Online</h1>
-
-<p>This API is currently hosted on:
- <a href="https://beebuckets.herokuapp.com/">https://beebuckets.herokuapp.com/</a></p>
 
 <h1 id="contributions">Contributions</h1>
 
-<p>This API is open source and contributions are welcomed. You can clone the <a href="https://github.com/andela-aadepoju/Bucketlist">Github</a> repository and raise a <code class="prettyprint">pull request</code> for your contributions.  </p>
+<p>This API is open source and contributions are welcomed. You can clone the <a href="https://github.com/andela-aadepoju/Bucketlist">Github</a> repository and raise a pull request for your contributions.</p>
 
 <p>Thank You</p>
 
-<p><a href="http://mradeybee.com">Adepoju Adebayo</a>, Software developer at <a href="http://andela.com">Andela</a></p>
+<p>Adepoju Adebayo, Software developer at <a href="http://andela.com">Andela</a></p>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="json">json</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-          </div>
       </div>
     </div>
   </body>
