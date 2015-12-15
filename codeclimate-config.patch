@@ -9,6 +9,5 @@ index e69de29..f3c2a9b 100644
 +    enabled: true
 +ratings:
 +  paths: []
-+exclude_paths: [
-"public/**/*"
-]
++exclude_paths:
+- "public/**/*"
