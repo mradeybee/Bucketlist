@@ -3,7 +3,7 @@ module V1
     before_action :authenticate
 
     def index
-      limit =  bucketlist_params[:limit]
+      limit = bucketlist_params[:limit]
       page = bucketlist_params[:page]
       q = bucketlist_params[:q]
       user = @current_user.id

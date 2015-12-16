@@ -94,15 +94,16 @@ class BucketlistsControllerTest < ActionDispatch::IntegrationTest
     bucketlist = JSON.parse(response.body)
     assert_equal bucketlist["bucketlists"][0]["name"], "My first list"
   end
+
   test "shows not found result for non exiisting queries" do
-    create_bucketlist
-    get "/v1/bucketlists", { q: "My list" },
+    @auth_token = login
+    get "/v1/bucketlists", { q: "exist" },
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     not_found = JSON.parse(response.body)
-    assert_equal not_found["Oops!"], "Bucketlist named 'My list' not found"
+    assert_equal not_found["Oops!"], "Bucketlist named 'exist' not found"
   end
 
   test "updates bucketlist" do

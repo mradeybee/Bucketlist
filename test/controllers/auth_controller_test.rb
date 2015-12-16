@@ -22,7 +22,7 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     assert_equal 401, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    assert_equal error["Error"], "Invalid Email"
+    assert_equal error["Error"], "Invalid Credentials"
   end
 
   test "reject invalid password" do
@@ -34,14 +34,14 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     assert_equal 401, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    assert_equal error["Error"], "Invalid Password"
+    assert_equal error["Error"], "Invalid Credentials"
   end
 
   test "logout user" do
     @auth_token = login
     get "/v1/auth/logout", {},
-         "Accept" => Mime::JSON,
-         "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     status = JSON.parse(response.body)

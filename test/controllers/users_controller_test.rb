@@ -71,7 +71,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal 401, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    assert_equal error["Error"], "An error occured, please login again"
+    assert_equal error["Error"], "Invalid Token, please login again"
     assert_equal 401, response.status
   end
 
