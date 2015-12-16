@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   patch "*unmatched_route", to: "application#no_route_found"
   post "*unmatched_route", to: "application#no_route_found"
   delete "*unmatched_route", to: "application#no_route_found"
-  # The priority is based upon order of creation: first created ->
   # highest priority.
   # See how all your routes lay out with "rake routes".
 

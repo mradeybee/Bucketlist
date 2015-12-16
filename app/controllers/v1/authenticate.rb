@@ -16,7 +16,7 @@ module V1
     rescue JWT::ExpiredSignature
       [false, { Error: "This session has expired, please login again" }]
     rescue
-      [false, { Error: "An error occured, please login again" }]
+      [false, { Error: "Invalid Token, please login again" }]
     end
   end
 end

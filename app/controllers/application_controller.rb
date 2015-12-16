@@ -9,13 +9,13 @@ class ApplicationController < ActionController::API
 
   def authenticate
     token = request.headers["HTTP_AUTHORIZATION"]
-    package = V1::Authenticate.decode_token(token)
-    if package.first
-      user = package.last
+    status, payload = V1::Authenticate.decode_token(token)
+    if status
+      user = payload
       @current_user = User.where(id: user["id"], email: user["email"]).first
       activate(@current_user)
     else
-      render json: package.last, status: 401
+      render json: payload, status: 401
     end
   end
 
