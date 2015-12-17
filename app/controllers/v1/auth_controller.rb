@@ -3,15 +3,15 @@ module V1
     before_action :authenticate, only: :logout
     def login
       user = User.find_by(email: auth_params[:email])
-      if user.nil?
-        render json: { Error: "Invalid Email" }.to_json, status: 401
-      elsif user.authenticate(auth_params[:password])
+      password = "$2a$10$8iyAfEv9vT0vL6OHi71M8u92P8vW79Axk5Ox4lrXFGs.DHq37MVzG"
+      user = User.new(password_digest: password) unless user
+      if user.authenticate(auth_params[:password])
         user.active = true
         user.save
         token = Authenticate.create_token(id: user.id, email: user.email)
         render json: { token_key: token }, status: 200
       else
-        render json: { Error: "Invalid Password" }, status: 401
+        render json: { Error: "Invalid Credentials" }, status: 401
       end
     end
 

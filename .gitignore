@@ -6,7 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
-
+/.gitignore
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -19,3 +19,8 @@
 
 # Ignore application configuration
 /config/application.yml
+# Ignore coverage folder
+
+/coverage/.last_run.json
+/coverage/.resultset.json
+/coverage/.resultset.json.lock

@@ -83,6 +83,17 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_equal item["item"]["name"], "My item"
   end
 
+  test "Shows error message for item s that do not exist" do
+    create_item
+    get "/v1/bucketlists/1/items/1111", {},
+        "Accept" => Mime::JSON,
+        "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
+    assert_equal 200, response.status
+    assert_equal Mime::JSON, response.content_type
+    item = JSON.parse(response.body)
+    assert_equal item["not_found!"], "Item with id 1111 does not exist"
+  end
+
   test "Shows all Item" do
     create_item
     get "/v1/bucketlists/1/items/", {},

@@ -41,8 +41,8 @@ module ActionDispatch
     def logout
       @auth_token = login
       get "/v1/auth/logout", {},
-           "Accept" => Mime::JSON,
-           "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
+          "Accept" => Mime::JSON,
+          "Content-Type" => Mime::JSON.to_s, "Authorization" => @auth_token
     end
 
     def create_bucketlist

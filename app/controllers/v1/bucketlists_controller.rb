@@ -3,22 +3,23 @@ module V1
     before_action :authenticate
 
     def index
+      limit = bucketlist_params[:limit]
+      page = bucketlist_params[:page]
+      q = bucketlist_params[:q]
+      user = @current_user.id
       if params[:q].present?
-        search = Bucketlist.search(@current_user.id, params[:q])
-        @bucketlist = paginate(search, "search", params[:limit], params[:page])
+        @bucketlist = Bucketlist.paginate("search", user, q, page, limit)
         render json: @bucketlist, status: 200
       else
-        lists = Bucketlist.lists(@current_user.id)
-        @bucketlist = paginate(lists, "index", params[:limit], params[:page])
+        @bucketlist = Bucketlist.paginate("index", user, q, page, limit)
         render json: @bucketlist, status: 200
       end
     end
 
     def show
       bucketlist = Bucketlist.find_list(params[:id], @current_user.id)
-      not_found = "Bucketlist with id #{params[:id]} does not exist"
       if bucketlist.nil?
-        render json: { not_found!: not_found }
+        render json: not_found
       else
         render json: bucketlist
       end
@@ -44,7 +45,8 @@ module V1
     end
 
     def destroy
-      @bucketlist = Bucketlist.find(params[:id])
+      @bucketlist = Bucketlist.find_by_id(params[:id])
+      return render json: not_found if @bucketlist.nil?
       if @bucketlist.destroy
         render json: { Deleted: "Bucketlist with its items, has been deleted" }
       end
@@ -56,21 +58,8 @@ module V1
       params.permit(:id, :name, :publicity, :limit, :page, :q)
     end
 
-    def paginate(methods, type, page = nil, limit = nil)
-      lists = limit.to_i * page.to_i
-      set = lists - limit.to_i
-      result = methods.limit(limit).offset(set)
-      check_resut(result, type)
-    end
-
-    def check_resut(result, type)
-      if type == "search" && result.empty?
-        return { Oops!: "Bucketlist named '#{params[:q]}' not found" }
-      elsif type == "index" && result.empty?
-        return { Oops!: "Bucketlist is empty" }
-      else
-        result
-      end
+    def not_found
+      { not_found!: "Bucketlist with id #{params[:id]} does not exist" }
     end
   end
 end
