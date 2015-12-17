@@ -7,8 +7,6 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
          email: "adey@bee.com", password: "password"
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
-    token = JSON.parse(response.body)
-    assert_equal token["token_key"], "#{token['token_key']}"
   end
 
   test "reject invalid email" do
