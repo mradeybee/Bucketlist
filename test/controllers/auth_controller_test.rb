@@ -5,8 +5,6 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     create_user
     post "/v1/auth/login",
          email: "adey@bee.com", password: "password"
-    result = JSON.parse(response.body)
-    result["token_key"]
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     token = JSON.parse(response.body)
@@ -17,8 +15,6 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     create_user
     post "/v1/auth/login",
          email: "adeybee.com", password: "password"
-    result = JSON.parse(response.body)
-    result["token_key"]
     assert_equal 401, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
@@ -29,9 +25,6 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     create_user
     post "/v1/auth/login",
          email: "adey@bee.com", password: "sword"
-    result = JSON.parse(response.body)
-    result["token_key"]
-    assert_equal 401, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
     assert_equal error["Error"], "Invalid Credentials"
